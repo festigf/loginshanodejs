@@ -1,0 +1,16 @@
+{
+  "name": "angularjs-node-mysql",
+  "version": "0.0.0",
+  "description": "Esempio login e aggiungi cliente",
+  "keywords": [
+    "login",
+    "express"
+  ],
+  "author": "gf",
+  "license": "Unlicense",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.3",
+    "mysql": "^2.13.0"
+  }
+}

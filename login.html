@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  	<title>Login</title>
+	<script src="angular.js"></script>
+  	<script src="sha3.min.js"></script>
+	<script type="text/javascript">
+	  	angular.module("app",[])
+	  	.controller('loginCTRL', ['$scope','$http','$window', function($scope,$http,$window){
+	  		$scope.dati={};
+	  	  	$scope.dati.username="";	
+	  	  	$scope.dati.password="";
+			$scope.FailLog=false;
+	  	  	$scope.submit=function() {
+			    $scope.dati.password=sha3_512($scope.dati.password);
+			    $http.post("/log",$scope.dati)
+				    .then(function(result){
+	    				$window.location.href='/AddClient.html';
+				    },function(err){
+					    $scope.FailLog=true;
+					    $scope.dati.username="";	
+	            	    $scope.dati.password="";
+  		        	})
+  	  		}
+	  	}])
+	</script>
+  </head>
+<body ng-controller="loginCTRL">
+	<form ng-submit="submit()">
+	  <input type="text" ng-model="dati.username" name="username" id="username" ng-init="dati.username='user1'">
+	  <input type="password" ng-model="dati.password" name="password" id="password" ng-init="dati.password='user1'">
+	  <input type="submit" id="submit" value="Submit" />
+	</form>
+	<div ng-show="FailLog">
+		Username o Passward non corretti
+	</div>
+</body>
+</html>
+
